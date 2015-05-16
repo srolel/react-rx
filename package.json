@@ -2,7 +2,7 @@
   "name": "react-rxjs-flow",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "utils/rx-store.js",
   "scripts": {
     "start": "webpack -wdc --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
