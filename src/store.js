@@ -1,23 +1,8 @@
 var Keys = require('./keys');
 var Actions = require('./actions');
+var RxStore = require('./utils/rx-store');
 
-class RxStore extends Rx.BehaviorSubject {
-  constructor(initialState, actions) {
-    super(initialState);
-    Rx.Observable.merge(actions)
-        .flatMap(action => (this[action] || this.default).call(this, this.getState(), action))
-        .subscribe(this);
-  }
-
-  getState() {
-    return this.getValue();
-  }
-
-  default(state, action) {
-      console.warn(`${action} not recognized in model.`);
-      return [state];
-  }
-}
+var Rx = require('rx');
 
 class CounterModel extends RxStore {
   constructor(counter, actions) {
@@ -27,7 +12,7 @@ class CounterModel extends RxStore {
 
   [Keys.INCREMENT_COUNTER](state) {
     state.counter++;
-    return [state];
+    return state;
   }
 
   [Keys.DECREMENT_COUNTER](state) {
